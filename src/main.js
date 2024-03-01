@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import "./style.css";
+import { createRouter, createWebHistory } from "vue-router";
 import App from "./App.vue";
 
 // Vuetify
@@ -13,4 +14,19 @@ const vuetify = createVuetify({
   directives,
 });
 
-createApp(App).use(vuetify).mount("#app");
+import Home from "./pages/Home.vue";
+import Register from "./pages/Register.vue";
+
+const routes = [
+  { path: "/", component: Home },
+  { path: "/register", component: Register },
+];
+
+const router = createRouter({
+  // 4. Provide the history implementation to use. We
+  // are using the hash history for simplicity here.
+  history: createWebHistory(),
+  routes, // short for `routes: routes`
+});
+
+createApp(App).use(vuetify).use(router).mount("#app");
